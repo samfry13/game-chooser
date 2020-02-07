@@ -1,18 +1,22 @@
 body {
     padding: 0;
     margin: 0;
-}
-
-.margin-wrapper {
-    padding: 0 140px;
-}
-
-.main #header {
     max-width: 1920px;
-    height: 125px;
-    grid-template-columns: 140px 191px 191px auto 191px 191px 140px;
-    grid-column-gap: 16px;
+}
+
+.main {
+    height: 95vh;
+}
+
+.grid-wrapper {
     display: grid;
+    grid-template-columns: 2fr repeat(8, 3fr) 2fr;
+    grid-column-gap: 8px;
+}
+
+#header .grid-wrapper {
+    grid-template-rows: 125px;
+    align-items: center;
 }
 
 #header .logo {
@@ -34,14 +38,25 @@ body {
 }
 
 #header .links {
-    grid-column: 5 / span 2;
+    grid-column: 8 / span 2;
     display: grid;
     align-items: center;
-    grid-template-columns: 191px 191px;
-    grid-column-gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 8px;
 }
 
-#header .links a {
+#header .welcome {
+    grid-column: 8 / span 2;
+    display: grid;
+    align-items: center;
+}
+
+#header .links p {
+    cursor: pointer;
+}
+
+#header .links p,
+#header .welcome p{
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -54,4 +69,98 @@ body {
 
 #header {
     background: #04383E;
+}
+
+#landing {
+    display: flex;
+    min-height: 90%
+}
+
+#landing .text {
+    grid-column: 2 / span 5;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+}
+
+#landing .text .title {
+    color: #04383E;
+    font-size: 100px;
+    align-self: center;
+}
+
+#landing .text .title hr {
+    margin: 0;
+}
+
+#landing .text .description {
+    color: #696969;
+    font-size: 36px;
+}
+
+#landing .images {
+    grid-column: 8 / span 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 2fr);
+    grid-column-gap: 8px;
+    align-items: center;
+}
+
+#landing .images .controller {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#landing .images .chess {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+}
+
+#home .grid-wrapper {
+    grid-template-rows: 400px auto;
+}
+
+#home .choose.button {
+    grid-row: 1;
+    grid-column: 5 / span 2;
+    justify-self: stretch;
+    align-self: center;
+    background-color: #F5D06D;
+    border: none;
+    color: #04383E;
+    text-decoration: none;
+    cursor: pointer;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    border-radius: 50px;
+    box-shadow: #707070 3px 3px 6px;
+}
+
+#home .games {
+    grid-row: 2;
+    grid-column: 3 / span 6;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 38px;
+    grid-column-gap: 8px;
+    align-items: start;
+}
+
+#home .games .game {
+    justify-self: center;
+    border-radius: 50px;
+    height: 398px;
+    width: 398px;
+    box-shadow: #707070 3px 3px 6px;
+    background-color: #F5D06D;
+    transition: all .2s;
+}
+
+#home .games .game:hover {
+    /*box-shadow: black 10px 10px 5px;*/
+    height: 410px;
 }
