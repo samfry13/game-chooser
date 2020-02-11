@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import logo from "../assets/logo_combined_h-200.png"
+import logo from "../assets/logo_combined_h-200.png";
+import profile from "../assets/profile_icon.png";
 
 export default class Navbar extends Component {
 
@@ -19,6 +20,7 @@ export default class Navbar extends Component {
                 </div>
                 : <div className="welcome">
                   <p>Welcome, Sam</p>
+                  <img src={profile} alt="profile_image"/>
                 </div>}
           </div>
         </div>
