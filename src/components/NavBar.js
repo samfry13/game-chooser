@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import logo from "../assets/logo_combined_h-200.png";
 import profile from "../assets/profile_icon.png";
+import {Link} from 'react-router-dom';
+import Routes from '../constants/paths';
+
 
 export default class Navbar extends Component {
 
@@ -11,7 +14,7 @@ export default class Navbar extends Component {
         <div id="header">
           <div className="grid-wrapper">
             <div className="logo">
-              <img src={logo} alt="logo"/>
+              <Link to={Routes.home}><img src={logo} alt="logo"/></Link>
             </div>
 
             {!loggedIn ? <div className="links">
@@ -20,7 +23,7 @@ export default class Navbar extends Component {
                 </div>
                 : <div className="welcome">
                   <p>Welcome, Sam</p>
-                  <img src={profile} alt="profile_image"/>
+                  <Link to={Routes.profile}><img src={profile} alt="profile_image"/></Link>
                 </div>}
           </div>
         </div>
@@ -28,6 +31,6 @@ export default class Navbar extends Component {
   }
 
   logIn() {
-      this.props.setCookie('SelectAGame-SessionID', 'SomeValidSessionID');
+      this.props.setCookie('SessionID', 'SomeValidSessionID');
   }
 }

@@ -49,7 +49,7 @@ export default class HomePage extends Component {
               {games.map(game => {
                 return <div className="game">
                   <div className="image">
-                    <img src={game.url} alt="image"/>
+                    <img src={game.url} alt="game"/>
                   </div>
                   <div className="players">Players {game.players}</div>
                   <div className="length">Length: {game.time}</div>
