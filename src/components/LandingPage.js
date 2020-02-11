@@ -19,8 +19,8 @@ export default class LandingPage extends Component {
                 no time!</div>
             </div>
             <div className="images">
-              <img className="controller" src={chess} alt="controller"/>
-              <img className="chess" src={controller} alt="chess"/>
+              <img className="controller" src={chess} alt="controller" width="100px"/>
+              <img className="chess" src={controller} alt="chess" width="140px"/>
             </div>
           </div>
         </div>

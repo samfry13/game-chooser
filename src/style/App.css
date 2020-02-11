@@ -15,7 +15,7 @@ body {
 }
 
 #header .grid-wrapper {
-    grid-template-rows: 125px;
+    grid-template-rows: 75px;
     align-items: center;
 }
 
@@ -33,7 +33,7 @@ body {
 }
 
 #header .logo img {
-    height: 32px;
+    height: 80px;
     width: auto;
 }
 
@@ -62,7 +62,7 @@ body {
     justify-content: space-between;
     align-items: center;
     color: #fff;
-    font-size: 36px;
+    font-size: 21px;
     text-decoration: none;
     justify-self: center;
 }
@@ -84,7 +84,7 @@ body {
 
 #landing .text .title {
     color: #04383E;
-    font-size: 100px;
+    font-size: 80px;
     align-self: center;
 }
 
@@ -94,7 +94,7 @@ body {
 
 #landing .text .description {
     color: #696969;
-    font-size: 36px;
+    font-size: 30px;
 }
 
 #landing .images {
