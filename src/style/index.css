@@ -3,6 +3,16 @@
   src: url("fonts/SF-Pro-Display-Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: SF Pro Rounded Regular;
+  src: url("fonts/SF-Pro-Rounded-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: SF Pro Rounded Bold;
+  src: url("fonts/SF-Pro-Rounded-Bold.otf") format("opentype");
+}
+
 body {
   margin: 0;
   font-family: SF Pro Display, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
