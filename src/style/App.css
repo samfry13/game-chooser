@@ -119,11 +119,12 @@ body {
 
 #home .grid-wrapper {
     grid-template-rows: 400px auto;
+    grid-template-columns: auto repeat(3, 398px) auto
 }
 
 #home .choose.button {
     grid-row: 1;
-    grid-column: 5 / span 2;
+    grid-column: 3;
     justify-self: stretch;
     align-self: center;
     background-color: #F5D06D;
@@ -142,7 +143,7 @@ body {
 
 #home .games {
     grid-row: 2;
-    grid-column: 3 / span 6;
+    grid-column: 2 / span 3;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 38px;
@@ -151,10 +152,13 @@ body {
 }
 
 #home .games .game {
-    justify-self: center;
+    justify-self: stretch;
     border-radius: 50px;
+    display: grid;
+    grid-template-rows: 4fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
     height: 398px;
-    width: 398px;
     box-shadow: #707070 3px 3px 6px;
     background-color: #F5D06D;
     transition: all .2s;
@@ -163,4 +167,10 @@ body {
 #home .games .game:hover {
     /*box-shadow: black 10px 10px 5px;*/
     height: 410px;
+}
+
+#home .games .game .image img {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom: #04383E 1px solid;
 }
