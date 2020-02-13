@@ -24,11 +24,10 @@ function App() {
         <Router>
             <NavBar loggedIn={loggedIn} setCookie={setCookie}/>
             <Switch>
-                { !loggedIn ? <Route exact path={Routes.home} component={LandingPage}/> : <Route exact path={Routes.home} component={HomePage}/>}
+                { !loggedIn ? <Route exact path={Routes.home} render={() => <LandingPage setCookie={setCookie}/>}/> : <Route exact path={Routes.home} component={HomePage}/>}
                 <Route path={Routes.profile} component={ProfilePage}/>
             </Switch>
         </Router>
-
     </div>
   );
 }

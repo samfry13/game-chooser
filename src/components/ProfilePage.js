@@ -7,7 +7,7 @@ export default class ProfilePage extends Component {
   render() {
     return (
         <div id="profile">
-            <div className="grid-wrapper">
+            <div id="profile-values" className="grid-wrapper">
                 <div className="key">Name:</div>
                 <div className="value">Sam</div>
                 <div className="key">Email:</div>
@@ -16,7 +16,7 @@ export default class ProfilePage extends Component {
                 <PrimaryButton id="add-game" onClick={this.AddGame} text="Add Game"/>
             </div>
             <div id="game-table">
-                <div className="table-header row">
+                <div id="table-header" className="row">
                     <div className="game-col">Game</div>
                     <div className="players-col">Players</div>
                     <div className="diff-col">Difficulty</div>
@@ -25,7 +25,7 @@ export default class ProfilePage extends Component {
                 {games.map(game => {
                     return <div className="row">
                         <div className="game-col">{game.title}</div>
-                        <div className="players-col">{game.players}</div>
+                        <div className="players-col">{game.minPlayers} - {game.maxPlayers}</div>
                         <div className="diff-col">{game.difficulty}</div>
                         <div className="length-col">{game.time}</div>
                     </div>
