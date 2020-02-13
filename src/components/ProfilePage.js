@@ -24,7 +24,7 @@ export default class ProfilePage extends Component {
                 </div>
                 {games.map(game => {
                     return <div className="row">
-                        <div className="game-col">{game.name}</div>
+                        <div className="game-col">{game.title}</div>
                         <div className="players-col">{game.players}</div>
                         <div className="diff-col">{game.difficulty}</div>
                         <div className="length-col">{game.time}</div>
