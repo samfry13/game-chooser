@@ -401,13 +401,16 @@ body {
     display: block;
 }
 
-.modal-content {
+.content {
     position: relative;
-    background-color: #fefefe;
+    background-color: #04383E;
+    color: #F5F5F5;
     margin: auto;
+    border-radius: 50px;
     padding: 0;
     border: 1px solid #888;
-    width: 80%;
+    width: 980px;
+    height: 780px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -423,5 +426,100 @@ body {
 @keyframes animatetop {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
+}
+
+.modal .content .footer {
+    display: grid;
+    height: 60px;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.modal .content .footer .pages {
+    display: flex;
+    grid-column: 2;
+    justify-content: center;
+}
+
+.modal .content .footer .pages .page {
+    background-color: #F5D06D;
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+    border-radius: 24px;
+    transition: background-color 0.2s;
+}
+
+.modal .content .footer .pages .page.active {
+    background-color: #DBF6FF;
+}
+
+.modal .content .footer .next.button {
+    width: 160px;
+    height: 48px;
+    background-color: #F5D06D;
+    border-radius: 15px;
+    color: #04383E;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.modal .content .body {
+    display: none;
+    grid-template-rows: 150px 560px auto;
+}
+
+.modal .content .body.active {
+    display: grid;
+}
+
+.modal .content .body .title {
+    font-size: 42px;
+    align-self: end;
+    justify-self: center;
+}
+
+.modal .content .body .input {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 560px;
+}
+
+.modal .content .body .input .slider {
+    width: 590px;
+    border-radius: 15px;
+    background: #F5D06D;
+}
+
+.modal .content .body.difficulty .input .slider {
+    background: linear-gradient(to right, #77dd77, #fdfd96, #ff6961);
+}
+
+.modal .content .body .input .slider input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    background: none;
+    outline: none;
+}
+
+.modal .content .body .input .slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 45px;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.modal .content .body .input .slider input::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 45px;
+    background: #FFF;
+    cursor: pointer;
 }
 

@@ -1,17 +1,26 @@
 import React, {Component} from 'react';
 
 import Modal from "./Modal";
+import PlayersPage from "./modal_pages/PlayersPage";
+import DifficultyPage from "./modal_pages/DifficultyPage";
+import LengthPage from "./modal_pages/LengthPage";
 
 import {games} from '../data/games';
 import PlayerIcon from '../assets/person-24px.svg';
 import TimerIcon from '../assets/timer-24px.svg';
 
-
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openModal: false
+      openModal: false,
+      modalPageNum: 0,
+      searchQueries: {
+        players: 0,
+        difficulty: 0,
+        length: 0,
+      },
+      isSearchActive: false,
     }
   }
   // Converts a #ffffff hex string into an [r,g,b] array
@@ -58,8 +67,16 @@ export default class HomePage extends Component {
     return this.r2h(iColor);
   }
 
+  renderPagination(activeIndex) {
+    let pages = [];
+    for (let i = 0; i < 3; i++) {
+      pages.push(i === activeIndex ? <div className="page active"/> : <div className="page"/>)
+    }
+    return pages;
+  }
+
   render() {
-    const {openModal} = this.state;
+    const {openModal, modalPageNum, searchQueries} = this.state;
     return (
       <>
         <div id="home">
@@ -68,8 +85,8 @@ export default class HomePage extends Component {
                  onClick={() => this.setState({openModal: true})}
             ><div>Choose a Game</div></div>
             <div className="games">
-              {games.map(game => {
-                return <div className="game">
+              {games.map((game, index) => {
+                return <div className="game" key={index}>
                   <div className="image">
                     <img src={game.url} alt="game"/>
                   </div>
@@ -97,14 +114,25 @@ export default class HomePage extends Component {
           </div>
         </div>
         <Modal open={openModal}>
-          <div className="title">How many players do you have?</div>
-          <div className="slider">5</div>
-          <div className="pages">
-            <div className="page active"/>
-            <div className="page"/>
-            <div className="page"/>
+          <PlayersPage active={modalPageNum === 0} setValue={value =>
+              this.setState({searchQueries: {...searchQueries, players: value}})}/>
+          <DifficultyPage active={modalPageNum === 1} setValue={value =>
+              this.setState({searchQueries: {...searchQueries, difficulty: value}})}/>
+          <LengthPage active={modalPageNum === 2} setValue={value =>
+              this.setState({searchQueries: {...searchQueries, length: value}})}/>
+          <div className="footer">
+            <div className="pages">
+              {this.renderPagination(modalPageNum)}
+            </div>
+            <div className="next button" onClick={() => {
+              if (modalPageNum === 2) {
+                this.setState({modalPageNum: 0, openModal: false});
+              }
+              else {
+                this.setState({modalPageNum: modalPageNum + 1});
+              }
+            }}>{modalPageNum === 2 ? "Finish" : "Next"}</div>
           </div>
-          <div className="next button" onClick={() => this.setState({openModal: false})}>Next</div>
         </Modal>
       </>
     );

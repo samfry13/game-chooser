@@ -5,7 +5,7 @@ export default class Modal extends Component {
         const {children, open} = this.props;
         return (
             <div className={open ? "modal active" : "modal"}>
-                <div className="modal-content">
+                <div className="content">
                     {children}
                 </div>
             </div>
