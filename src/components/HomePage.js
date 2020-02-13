@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
+
+import Modal from "./Modal";
+
 import {games} from '../data/games';
 import PlayerIcon from '../assets/person-24px.svg';
 import TimerIcon from '../assets/timer-24px.svg';
 
 
 export default class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openModal: false
+    }
+  }
   // Converts a #ffffff hex string into an [r,g,b] array
   h2r(hex) {
     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -50,10 +59,14 @@ export default class HomePage extends Component {
   }
 
   render() {
+    const {openModal} = this.state;
     return (
+      <>
         <div id="home">
           <div className="grid-wrapper">
-            <div className="choose button"><div>Choose a Game</div></div>
+            <div className="choose button"
+                 onClick={() => this.setState({openModal: true})}
+            ><div>Choose a Game</div></div>
             <div className="games">
               {games.map(game => {
                 return <div className="game">
@@ -83,6 +96,17 @@ export default class HomePage extends Component {
             </div>
           </div>
         </div>
+        <Modal open={openModal}>
+          <div className="title">How many players do you have?</div>
+          <div className="slider">5</div>
+          <div className="pages">
+            <div className="page active"/>
+            <div className="page"/>
+            <div className="page"/>
+          </div>
+          <div className="next button" onClick={() => this.setState({openModal: false})}>Next</div>
+        </Modal>
+      </>
     );
   }
 }
