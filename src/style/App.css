@@ -154,6 +154,7 @@ body {
     grid-column: 2 / span 3;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 410px;
     grid-row-gap: 38px;
     grid-column-gap: 16px;
     align-items: start;
@@ -164,21 +165,74 @@ body {
     border-radius: 50px;
     display: grid;
     grid-template-rows: 4fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "image image"
+        "title title"
+        "player length"
+        "difficulty difficulty";
     align-items: center;
     justify-items: center;
     height: 390px;
     box-shadow: #707070 3px 3px 6px;
     background-color: #F5D06D;
     transition: all .2s;
+    color: #04383E;
+    overflow: hidden;
 }
 
 #home .games .game:hover {
-    /*box-shadow: black 10px 10px 5px;*/
     height: 410px;
+    grid-template-rows: 4fr 1fr 1fr 2fr;
+}
+
+#home .games .game .image {
+    grid-area: image;
 }
 
 #home .games .game .image img {
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     border-bottom: #04383E 1px solid;
+    width: 394px;
+}
+
+#home .games .game .title {
+    grid-area: title;
+    font-size: 36px;
+}
+
+#home .games .game .players img,
+#home .games .game .length img {
+    height: 36px;
+    width: auto;
+}
+
+#home .games .game .players {
+    grid-area: player;
+    display: grid;
+    justify-items: center;
+}
+
+#home .games .game .length {
+    grid-area: length;
+    display: grid;
+    justify-items: center;
+}
+
+#home .games .game .difficulty {
+    grid-area: difficulty;
+    place-self: stretch;
+    display: grid;
+    place-items: center;
+    margin-top: 15px;
+}
+
+#home .games .game .difficulty .text {
+    transition: opacity 0.2s;
+    opacity: 0;
+}
+
+#home .games .game:hover .difficulty .text  {
+    opacity: 100%;
 }
