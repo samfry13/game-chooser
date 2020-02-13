@@ -50,8 +50,6 @@ export default class HomePage extends Component {
   }
 
   render() {
-    console.log(games);
-
     return (
         <div id="home">
           <div className="grid-wrapper">
@@ -66,12 +64,13 @@ export default class HomePage extends Component {
                   <div className="players">
                     <img src={PlayerIcon} alt="players_icon"/>
                     <br/>
-                    {game.players}
+                    {game.minPlayers === game.maxPlayers ? game.minPlayers
+                        : game.minPlayers + " - " + game.maxPlayers}
                   </div>
                   <div className="length">
                     <img src={TimerIcon} alt="length_icon"/>
                     <br/>
-                    {game.time}
+                    {game.time} min
                   </div>
                   <div className="difficulty" style={{
                     backgroundColor: this.calculateBGColor(game.difficulty),
