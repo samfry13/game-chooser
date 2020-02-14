@@ -481,19 +481,28 @@ body {
 
 .modal .content .body .input {
     justify-self: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     height: 560px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.modal .content .body .input .values {
+    display: grid;
+    grid-template-columns: repeat(6, 20px);
+    justify-content: space-between;
+    align-self: end;
+    margin-bottom: 20px;
+    font-size: 42px;
 }
 
 .modal .content .body .input .slider {
     width: 590px;
+    height: 20px;
     border-radius: 15px;
     background: #F5D06D;
 }
 
-.modal .content .body.difficulty .input .slider {
+.modal .content .body .input .slider.gradient {
     background: linear-gradient(to right, #77dd77, #fdfd96, #ff6961);
 }
 

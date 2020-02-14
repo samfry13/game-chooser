@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 
 import Modal from "./Modal";
-import PlayersPage from "./modal_pages/PlayersPage";
-import DifficultyPage from "./modal_pages/DifficultyPage";
-import LengthPage from "./modal_pages/LengthPage";
 
 import {games} from '../data/games';
 import PlayerIcon from '../assets/person-24px.svg';
 import TimerIcon from '../assets/timer-24px.svg';
+import DefaultPage from "./modal_pages/DefaultPage";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -114,12 +112,33 @@ export default class HomePage extends Component {
           </div>
         </div>
         <Modal open={openModal}>
-          <PlayersPage active={modalPageNum === 0} setValue={value =>
-              this.setState({searchQueries: {...searchQueries, players: value}})}/>
-          <DifficultyPage active={modalPageNum === 1} setValue={value =>
-              this.setState({searchQueries: {...searchQueries, difficulty: value}})}/>
-          <LengthPage active={modalPageNum === 2} setValue={value =>
-              this.setState({searchQueries: {...searchQueries, length: value}})}/>
+          <DefaultPage active={modalPageNum === 0}
+                       title="How many players do you have?"
+                       minValue={2}
+                       maxValue={7}
+                       stepSize={1}
+                       interpolateValues
+                       setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}
+          />
+          <DefaultPage active={modalPageNum === 1}
+                       title="How intensive of a game do you want to play?"
+                       minDisplayValue="Easy"
+                       maxDisplayValue="Difficult"
+                       minValue={0}
+                       maxValue={1}
+                       stepSize={0.1}
+                       hasGradient
+                       setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}
+          />
+          <DefaultPage active={modalPageNum === 2}
+                       title="How long of a game do you want to play?"
+                       minDisplayValue={"15 min"}
+                       maxDisplayValue={"2 hrs"}
+                       minValue={15}
+                       maxValue={120}
+                       stepSize={15}
+                       setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}
+          />
           <div className="footer">
             <div className="pages">
               {this.renderPagination(modalPageNum)}
