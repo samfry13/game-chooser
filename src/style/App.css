@@ -486,7 +486,7 @@ body {
     grid-template-rows: 1fr 1fr;
 }
 
-.modal .content .body .input .values {
+.input .values {
     display: grid;
     grid-template-columns: repeat(6, 20px);
     justify-content: space-between;
@@ -495,18 +495,18 @@ body {
     font-size: 42px;
 }
 
-.modal .content .body .input .slider {
+.input .slider {
     width: 590px;
     height: 20px;
     border-radius: 15px;
     background: #F5D06D;
 }
 
-.modal .content .body .input .slider.gradient {
+.input .slider.gradient {
     background: linear-gradient(to right, #77dd77, #fdfd96, #ff6961);
 }
 
-.modal .content .body .input .slider input {
+.input .slider input {
     -webkit-appearance: none;
     width: 100%;
     height: 20px;
@@ -514,7 +514,8 @@ body {
     outline: none;
 }
 
-.modal .content .body .input .slider input::-webkit-slider-thumb {
+.input .slider input::-webkit-slider-thumb,
+.input .slider input::-moz-range-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 10px;
@@ -523,12 +524,72 @@ body {
     cursor: pointer;
 }
 
-.modal .content .body .input .slider input::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
+.search {
+    grid-column: 2 / span 3;
+    grid-row: 1;
+    color: #04383E;
+    background: #F5D06D;
+    height: 200px;
+    width: 100%;
+}
+
+.search .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search .header .title {
+    font-size: 34px;
+}
+
+.search .header .close {
+    font-size: 16px;
+}
+
+.search .header .close .button {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.search .filters {
+    display: grid;
+    padding: 0 50px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 100px;
+}
+
+.search .filters .filter {
+    display: grid;
+}
+
+.search .filter .title {
+    justify-self: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.search .filters .filter .input .values {
+    font-size: 24px;
+}
+
+.filter .input .slider {
+    width: 100%;
+    height: 10px;
+    background: #FFF;
+}
+
+.filter .input .slider.gradient {
+    background: linear-gradient(to right, #77dd77, #fdfd96, #ff6961);
+}
+
+.filter .input .slider input {
+    height: 10px;
+}
+
+.filter .input .slider input::-webkit-slider-thumb,
+.filter .input .slider input::-moz-range-thumb {
     width: 10px;
     height: 45px;
-    background: #FFF;
-    cursor: pointer;
+    background: #04383E;
 }
 
