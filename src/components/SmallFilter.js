@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-export default class DefaultPage extends Component {
+export default class SmallFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,11 +23,11 @@ export default class DefaultPage extends Component {
   }
 
   render() {
-    const {setValue, active, title, minValue, maxValue, stepSize, hasGradient} = this.props;
+    const {setValue, title, minValue, maxValue, stepSize, hasGradient} = this.props;
     const {value, displayValues} = this.state;
 
     return (
-        <div className={"body" + (active ? " active" : "")}>
+        <div className="filter">
           <div className="title">{title}</div>
           <div className="input">
             <div className="values" style={{

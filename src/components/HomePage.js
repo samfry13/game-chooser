@@ -6,6 +6,7 @@ import {games} from '../data/games';
 import PlayerIcon from '../assets/person-24px.svg';
 import TimerIcon from '../assets/timer-24px.svg';
 import DefaultPage from "./modal_pages/DefaultPage";
+import SmallFilter from "./SmallFilter";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -73,17 +74,64 @@ export default class HomePage extends Component {
     return pages;
   }
 
+  filterGames() {
+    const {searchQueries: {players, difficulty, length}} = this.state;
+    return games.filter(game => {
+      return game.minPlayers >= parseInt(players) - 2 && game.maxPlayers <= parseInt(players) + 2;
+    }).filter(game => {
+      return game.difficulty >= parseFloat(difficulty) - 0.2 && game.difficulty <= parseFloat(difficulty) + 0.2;
+    }).filter(game => {
+      return game.time >= parseInt(length) - 30 && game.time <= parseInt(length) + 30;
+    });
+  }
+
   render() {
-    const {openModal, modalPageNum, searchQueries} = this.state;
+    const {openModal, modalPageNum, searchQueries, isSearchActive} = this.state;
+    const filteredGames = isSearchActive ? this.filterGames() : games;
     return (
       <>
         <div id="home">
           <div className="grid-wrapper">
-            <div className="choose button"
+            {isSearchActive && <div className="search">
+              <div className="header">
+                <div className="title">Search Filters</div>
+                <div className="close">Clear<span className="button"
+                                                  onClick={() => this.setState({isSearchActive: false})}
+                >&times;</span></div>
+              </div>
+              <hr/>
+              <div className="filters">
+                <SmallFilter title="Players"
+                             defaultValue={searchQueries.players}
+                             minValue={2}
+                             maxValue={7}
+                             stepSize={1}
+                             interpolateValues
+                             setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}/>
+                <SmallFilter title="Difficulty"
+                             minDisplayValue="Easy"
+                             maxDisplayValue="Difficult"
+                             defaultValue={searchQueries.difficulty}
+                             minValue={0}
+                             maxValue={1}
+                             stepSize={0.1}
+                             hasGradient
+                             setValue={value => this.setState({searchQueries: {...searchQueries, difficulty: value}})}/>
+                <SmallFilter title="Length"
+                             minDisplayValue="15 min"
+                             maxDisplayValue="2 hrs"
+                             defaultValue={searchQueries.length}
+                             minValue={15}
+                             maxValue={120}
+                             stepSize={15}
+                             setValue={value => this.setState({searchQueries: {...searchQueries, length: value}})}/>
+              </div>
+            </div>}
+            {!isSearchActive && <div className="choose button"
                  onClick={() => this.setState({openModal: true})}
-            ><div>Choose a Game</div></div>
+            ><div>Choose a Game</div></div>}
             <div className="games">
-              {games.map((game, index) => {
+              {filteredGames.map((game, index) => {
                 return <div className="game" key={index}>
                   <div className="image">
                     <img src={game.url} alt="game"/>
@@ -128,7 +176,7 @@ export default class HomePage extends Component {
                        maxValue={1}
                        stepSize={0.1}
                        hasGradient
-                       setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}
+                       setValue={value => this.setState({searchQueries: {...searchQueries, difficulty: value}})}
           />
           <DefaultPage active={modalPageNum === 2}
                        title="How long of a game do you want to play?"
@@ -137,7 +185,7 @@ export default class HomePage extends Component {
                        minValue={15}
                        maxValue={120}
                        stepSize={15}
-                       setValue={value => this.setState({searchQueries: {...searchQueries, players: value}})}
+                       setValue={value => this.setState({searchQueries: {...searchQueries, length: value}})}
           />
           <div className="footer">
             <div className="pages">
@@ -145,7 +193,7 @@ export default class HomePage extends Component {
             </div>
             <div className="next button" onClick={() => {
               if (modalPageNum === 2) {
-                this.setState({modalPageNum: 0, openModal: false});
+                this.setState({modalPageNum: 0, openModal: false, isSearchActive: true});
               }
               else {
                 this.setState({modalPageNum: modalPageNum + 1});
