@@ -30,8 +30,8 @@ body {
     width: auto;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #04383E;
-    color: #FFFFFF;
+    background-color: #F5D06D;
+    color: #04383E;
     font-family: SF Pro Rounded Regular, sans-serif;
     font-size: 20px;
     border-width: 1px;
@@ -69,14 +69,6 @@ body {
 #header .logo img {
     height: 80px;
     width: auto;
-}
-
-#header .links {
-    grid-column: 8 / span 2;
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 8px;
 }
 
 #header .welcome {
@@ -128,15 +120,21 @@ body {
     color: #04383E;
     font-size: 80px;
     align-self: center;
+    justify-self: center;
 }
 
-#landing .text .title hr {
-    margin: 0;
+#landing #get-started {
+    justify-self: center;
+    margin-top: 50px;
 }
 
-#landing .text .description {
-    color: #696969;
-    font-size: 30px;
+#landing #get-started button {
+    font-size: 45px;
+    height: auto;
+    letter-spacing: 5px;
+    padding: 20px 30px;
+    background-color: #04383E;
+    color: #FFFFFF;
 }
 
 #landing .images {
@@ -157,14 +155,6 @@ body {
     grid-column: 2;
     grid-row: 2;
     align-self: start;
-}
-
-#landing #login {
-    grid-column: 3;
-}
-
-#landing #sign-up {
-    grid-column: 5;
 }
 
 #home .grid-wrapper {

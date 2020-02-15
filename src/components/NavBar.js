@@ -17,11 +17,7 @@ export default class Navbar extends Component {
               <Link to={Routes.home}><img src={logo} alt="logo"/></Link>
             </div>
 
-            {!loggedIn ? <div className="links">
-                  <p onClick={() => {}}>Sign Up</p>
-                  <p onClick={() => this.logIn()}>Login</p>
-                </div>
-                : <div className="welcome">
+            {!loggedIn ? <div/> : <div className="welcome">
                   <p>Welcome, Sam</p>
                   <Link to={Routes.profile}><img src={profile} alt="profile_image"/></Link>
                 </div>}
