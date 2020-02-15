@@ -74,8 +74,20 @@ export default class HomePage extends Component {
     return pages;
   }
 
+  filterGames() {
+    const {searchQueries: {players, difficulty, length}} = this.state;
+    return games.filter(game => {
+      return game.minPlayers >= parseInt(players) - 2 && game.maxPlayers <= parseInt(players) + 2;
+    }).filter(game => {
+      return game.difficulty >= parseFloat(difficulty) - 0.2 && game.difficulty <= parseFloat(difficulty) + 0.2;
+    }).filter(game => {
+      return game.time >= parseInt(length) - 30 && game.time <= parseInt(length) + 30;
+    });
+  }
+
   render() {
     const {openModal, modalPageNum, searchQueries, isSearchActive} = this.state;
+    const filteredGames = isSearchActive ? this.filterGames() : games;
     return (
       <>
         <div id="home">
@@ -119,7 +131,7 @@ export default class HomePage extends Component {
                  onClick={() => this.setState({openModal: true})}
             ><div>Choose a Game</div></div>}
             <div className="games">
-              {games.map((game, index) => {
+              {filteredGames.map((game, index) => {
                 return <div className="game" key={index}>
                   <div className="image">
                     <img src={game.url} alt="game"/>
