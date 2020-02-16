@@ -4,16 +4,27 @@ import {games} from "../data/games";
 
 
 export default class ProfilePage extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          editing: false,
+          name: "Sam",
+          email: "email@example.com"
+      }
+  }
+
   render() {
+    const {editing, name, email} = this.state;
+
     return (
         <div id="profile">
             <div id="profile-values" className="grid-wrapper">
                 <div className="key">Name:</div>
-                <div className="value">Sam</div>
+                {editing ? <input id="edit-name" defaultValue={name}/> : <div className="value">{name}</div>}
                 <div className="key">Email:</div>
-                <div className="value">email@example.com</div>
-                <PrimaryButton id="edit-profile" onClick={this.EditProfile} text="Edit Profile"/>
-                <PrimaryButton id="add-game" onClick={this.AddGame} text="Add Game"/>
+                {editing ? <input id="edit-email" defaultValue={email}/> : <div className="value">{email}</div>}
+                {editing ? <PrimaryButton id={"edit-profile"} onClick={() => this.saveChanges()} text="Save Changes"/> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
+                {editing ? <div/> : <PrimaryButton id="add-game" onClick={() => this.addGame()} text="Add Game"/>}
             </div>
             <div id="game-table">
                 <div id="table-header" className="row">
@@ -35,11 +46,19 @@ export default class ProfilePage extends Component {
     );
   }
 
-  EditProfile() {
-      alert("You clicked the \"Edit Profile\" button.");
+  editProfile() {
+      this.setState({editing: true});
   }
 
-  AddGame() {
-      alert("You clicked the \"Add Game\" button.");
+  saveChanges() {
+      this.setState({
+          name: document.getElementById("edit-name").value,
+          email: document.getElementById("edit-email").value,
+          editing: false,
+      });
+  }
+
+  addGame() {
+      alert("The \"Add Game\" feature has not been implemented yet. Stay tuned!");
   }
 }
