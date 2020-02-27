@@ -3,6 +3,7 @@ import PrimaryButton from "./PrimaryButton";
 import {login, getUserAttributes} from "../HttpConnector";
 import {Redirect} from "react-router";
 import Routes from "../constants/paths";
+import InputField from "./InputField";
 
 
 export default class LoginPage extends Component {
@@ -15,32 +16,35 @@ export default class LoginPage extends Component {
   }
 
   render() {
-    if (this.state.redirectHome) {
+    const {redirectHome, redirectRegister, email, password} = this.state;
+
+    if (redirectHome) {
         return <Redirect to={Routes.home} />
     }
-    if (this.state.redirectRegister) {
+    if (redirectRegister) {
         return <Redirect to={Routes.register} />
     }
+
     return (
         <div id="login">
             <div className="title">Log In</div>
-            <div className="email-input">
-                <p>Email</p>
-                <input id="email"/>
+            <InputField label="Email"
+                        value={email}
+                        onChange={value => this.setState({email: value})}/>
+            <InputField label="Password"
+                        type="password"
+                        value={password}
+                        onChange={value => this.setState({password: value})}/>
+            <div className="buttons">
+                <PrimaryButton id="login-button" text="Login" onClick={async () => await this.logIn()}/>
+                <PrimaryButton id="register-redirect-button" text="Go To Register" onClick={() => this.setState({redirectRegister: true})}/>
             </div>
-            <div className="password-input">
-                <p>Password</p>
-                <input id="password"/>
-            </div>
-            <PrimaryButton id="login-button" text="Login" onClick={async () => await this.logIn()}/>
-            <PrimaryButton id="register-redirect-button" text="Go To Register" onClick={() => this.setState({redirectRegister: true})}/>
         </div>
     );
   }
 
   async logIn() {
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value ?? "";
+      const {email, password = ""} = this.state;
       if (!this.validateEmail(email)) {
           alert('Invalid email.');
           return;

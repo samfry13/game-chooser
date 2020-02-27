@@ -92,14 +92,13 @@ export default class HomePage extends Component {
       <>
         <div id="home">
           <div className="grid-wrapper">
-            {isSearchActive && <div className="search">
+            <div className={"search" + (isSearchActive ? " active" : "")}>
               <div className="header">
                 <div className="title">Search Filters</div>
                 <div className="close">Clear<span className="button"
                                                   onClick={() => this.setState({isSearchActive: false})}
                 >&times;</span></div>
               </div>
-              <hr/>
               <div className="filters">
                 <SmallFilter title="Players"
                              defaultValue={searchQueries.players}
@@ -124,14 +123,24 @@ export default class HomePage extends Component {
                              minValue={15}
                              maxValue={120}
                              stepSize={15}
+                             showIntermediateValue
+                             displayIntermediateValue={value => {
+                               if (value < 60) {
+                                 return value + " min";
+                               }
+                               else {
+                                 return (value / 60) + " hr(s)";
+                               }
+                             }}
                              setValue={value => this.setState({searchQueries: {...searchQueries, length: value}})}/>
               </div>
-            </div>}
-            {!isSearchActive && <div className="choose button"
+            </div>
+            {!isSearchActive ? <div className="choose button"
                  onClick={() => this.setState({openModal: true})}
-            ><div>Choose a Game</div></div>}
+            ><div>Choose a Game</div></div> : <div className="try-title">Try one of these...</div>}
             <div className="games">
-              {filteredGames.map((game, index) => {
+              {filteredGames.length > 0 ?
+              filteredGames.map((game, index) => {
                 return <div className="game" key={index}>
                   <div className="image">
                     <img src={game.url} alt="game"/>
@@ -155,7 +164,7 @@ export default class HomePage extends Component {
                         : game.difficulty > 0.33 ? "Moderate" : "Easy"}</div>
                   </div>
                 </div>
-              })}
+              }) : <div className="no-games">No games match your search criteria...</div>}
             </div>
           </div>
         </div>
@@ -185,6 +194,15 @@ export default class HomePage extends Component {
                        minValue={15}
                        maxValue={120}
                        stepSize={15}
+                       showIntermediateValue
+                       displayIntermediateValue={value => {
+                         if (value < 60) {
+                           return value + " min";
+                         }
+                         else {
+                           return (value / 60) + " hr(s)";
+                         }
+                       }}
                        setValue={value => this.setState({searchQueries: {...searchQueries, length: value}})}
           />
           <div className="footer">
