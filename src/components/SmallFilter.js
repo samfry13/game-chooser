@@ -23,17 +23,29 @@ export default class SmallFilter extends Component {
   }
 
   render() {
-    const {setValue, title, minValue, maxValue, stepSize, hasGradient} = this.props;
+    const {setValue, title,
+      minValue, maxValue, stepSize, hasGradient,
+      showIntermediateValue, displayIntermediateValue} = this.props;
     const {value, displayValues} = this.state;
+
+    let newDisplayValues = displayValues.slice();
+    if (showIntermediateValue) {
+      newDisplayValues.splice(1, 0, displayIntermediateValue
+          ? displayIntermediateValue(value) : value);
+    }
 
     return (
         <div className="filter">
           <div className="title">{title}</div>
-          <div className="input">
+          <div className={"input" + (showIntermediateValue ? " display" : "")}>
             <div className="values" style={{
-              gridTemplateColumns: "repeat(" + displayValues.length + ", auto)"
+              gridTemplateColumns: "repeat(" + newDisplayValues.length + ", auto)"
             }}>
-              {displayValues.map((value, i) => <div key={i} className="value">{value}</div>)}
+              {newDisplayValues.map((value, i) => {
+                return showIntermediateValue && i === 1
+                    ? <div key={i} className="value display">{value}</div>
+                    : <div key={i} className="value">{value}</div>
+              })}
             </div>
             <div className={"slider" + (hasGradient ? " gradient" : "")}>
               <input type="range" min={minValue} max={maxValue} step={stepSize} value={value}

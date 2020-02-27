@@ -181,6 +181,15 @@ body {
     box-shadow: #707070 3px 3px 6px;
 }
 
+#home .try-title {
+    grid-row: 1;
+    grid-column: 2 / span 2;
+    align-self: end;
+    padding-bottom: 32px;
+    font-size: 48px;
+    color: #04383E;
+}
+
 #home .games {
     grid-row: 2;
     grid-column: 2 / span 3;
@@ -267,6 +276,13 @@ body {
 
 #home .games .game:hover .difficulty .text  {
     opacity: 100%;
+}
+
+#home .games .no-games {
+    font-size: large;
+    grid-column: 2;
+    align-self: center;
+    color: #707070;
 }
 
 #profile #profile-values {
@@ -486,6 +502,16 @@ body {
     font-size: 42px;
 }
 
+.input .values .value.display {
+    font-size: 56px;
+    padding-bottom: 5px;
+    align-self: start;
+}
+
+.input .values .value {
+    align-self: end;
+}
+
 .input .slider {
     width: 590px;
     height: 20px;
@@ -516,17 +542,32 @@ body {
 }
 
 .search {
-    grid-column: 2 / span 3;
+    grid-column: 1 / span 5;
     grid-row: 1;
     color: #04383E;
     background: #F5D06D;
-    height: 200px;
+    height: 0;
+    display: grid;
     width: 100%;
+    transition: height 0.25s ease-in-out;
+    overflow: hidden;
+    grid-template-columns: auto repeat(3, 398px) auto;
+    grid-template-rows: 50px auto;
+    grid-row-gap: 16px;
+}
+
+.search.active {
+    height: 220px;
 }
 
 .search .header {
     display: flex;
     justify-content: space-between;
+    grid-column: 2 / span 3;
+    grid-row: 1;
+    border-bottom-color: #04383E;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
 
 .search .header .title {
@@ -547,10 +588,13 @@ body {
     padding: 0 50px;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 100px;
+    grid-column: 2 / span 3;
+    grid-row: 2;
 }
 
 .search .filters .filter {
     display: grid;
+    grid-template-rows: 40px auto;
 }
 
 .search .filter .title {
@@ -559,8 +603,25 @@ body {
     font-weight: bold;
 }
 
+.search .filters .filter .input,
+.search .filters .filter .input > .display {
+    align-self: end;
+}
+
+.search .filters .filter .input {
+    height: 90px;
+}
+
+.search .filters .filter .input > .display {
+    height: 104px;
+}
+
 .search .filters .filter .input .values {
     font-size: 24px;
+}
+
+.search .filters .filter .input .values .value.display {
+    font-size: 30px;
 }
 
 .filter .input .slider {
