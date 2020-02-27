@@ -17,7 +17,7 @@ const serverUrl = 'http://localhost:8081';
 const OK = 200;
 const ERROR = 500;
 
-async function register(name, email, password, addDefaultGames=true) {
+export async function register(name, email, password, addDefaultGames=true) {
     let response = await fetch(serverUrl + '/api/register', {
         method: 'POST',
         headers: {
@@ -41,7 +41,7 @@ async function register(name, email, password, addDefaultGames=true) {
     }
 }
 
-async function login(email, password) {
+export async function login(email, password) {
     let response = await fetch(serverUrl + '/api/login', {
         method: 'POST',
         headers: {
@@ -63,7 +63,7 @@ async function login(email, password) {
     }
 }
 
-async function getUserAttributes(userId) {
+export async function getUserAttributes(userId) {
     let response = await fetch(serverUrl + '/api/user/' + userId, {
         method: 'GET',
         headers: {
@@ -85,7 +85,7 @@ async function getUserAttributes(userId) {
     }
 }
 
-async function updateUser(userId, name, email) {
+export async function updateUser(userId, name, email) {
     let response = await fetch(serverUrl + '/api/updateUser', {
         method: 'PUT',
         headers: {
@@ -107,10 +107,3 @@ async function updateUser(userId, name, email) {
         throw new Error("Unknown error.");
     }
 }
-
-module.exports = {
-    register,
-    login,
-    getUserAttributes,
-    updateUser,
-};

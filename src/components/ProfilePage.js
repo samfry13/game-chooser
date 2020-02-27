@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PrimaryButton from "./PrimaryButton";
-import HttpConnector from "../HttpConnector";
+import {updateUser, getUserAttributes} from "../HttpConnector";
 
 
 export default class ProfilePage extends Component {
@@ -60,8 +60,8 @@ export default class ProfilePage extends Component {
       }
       try {
           let id = sessionStorage.getItem('UserId');
-          await HttpConnector.updateUser(id, name, email);
-          let attributes = await HttpConnector.getUserAttributes(id);
+          await updateUser(id, name, email);
+          let attributes = await getUserAttributes(id);
           sessionStorage.setItem('Name', attributes.name);
           sessionStorage.setItem('Email', attributes.email);
           sessionStorage.setItem('Games', JSON.stringify(attributes.games));
