@@ -72,9 +72,9 @@ body {
 }
 
 #header .welcome {
-    grid-column: 8 / span 2;
+    grid-column: 7 / span 3;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -85,20 +85,17 @@ body {
     padding-left: 10px;
 }
 
-#header .links p {
-    cursor: pointer;
-}
 
-#header .links p,
-#header .welcome p{
+#header .welcome p {
+    grid-column: 1 / span 2;
     position: relative;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: end;
     color: #fff;
     font-size: 21px;
     text-decoration: none;
-    justify-self: center;
+    justify-self: end;
+    cursor: pointer;
 }
 
 #header {
