@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PrimaryButton from "./PrimaryButton";
-import {games} from "../data/games";
+import HttpConnector from "../HttpConnector";
 
 
 export default class ProfilePage extends Component {
@@ -8,9 +8,10 @@ export default class ProfilePage extends Component {
       super(props);
       this.state = {
           editing: false,
-          name: "Sam",
-          email: "email@example.com"
-      }
+          name: sessionStorage.getItem('Name'),
+          email: sessionStorage.getItem('Email')
+      };
+      this.games = Object.values(JSON.parse(sessionStorage.getItem('Games')));
   }
 
   render() {
@@ -23,7 +24,7 @@ export default class ProfilePage extends Component {
                 {editing ? <input id="edit-name" defaultValue={name}/> : <div className="value">{name}</div>}
                 <div className="key">Email:</div>
                 {editing ? <input id="edit-email" defaultValue={email}/> : <div className="value">{email}</div>}
-                {editing ? <PrimaryButton id={"edit-profile"} onClick={() => this.saveChanges()} text="Save Changes"/> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
+                {editing ? <PrimaryButton id={"edit-profile"} onClick={async () => await this.saveChanges()} text="Save Changes"/> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
                 {editing ? <div/> : <PrimaryButton id="add-game" onClick={() => this.addGame()} text="Add Game"/>}
             </div>
             <div id="game-table">
@@ -33,7 +34,7 @@ export default class ProfilePage extends Component {
                     <div className="diff-col">Difficulty</div>
                     <div className="length-col">Length</div>
                 </div>
-                {games.map(game => {
+                {this.games.map(game => {
                     return <div className="row">
                         <div className="game-col">{game.title}</div>
                         <div className="players-col">{game.minPlayers} - {game.maxPlayers}</div>
@@ -50,12 +51,39 @@ export default class ProfilePage extends Component {
       this.setState({editing: true});
   }
 
-  saveChanges() {
-      this.setState({
-          name: document.getElementById("edit-name").value,
-          email: document.getElementById("edit-email").value,
-          editing: false,
-      });
+  async saveChanges() {
+      let name = document.getElementById('edit-name').value;
+      let email = document.getElementById('edit-email').value;
+      if (!this.validateEmail(email)) {
+          alert('Invalid email.');
+          return;
+      }
+      try {
+          let id = sessionStorage.getItem('UserId');
+          await HttpConnector.updateUser(id, name, email);
+          let attributes = await HttpConnector.getUserAttributes(id);
+          sessionStorage.setItem('Name', attributes.name);
+          sessionStorage.setItem('Email', attributes.email);
+          sessionStorage.setItem('Games', JSON.stringify(attributes.games));
+          this.setState({
+              name: sessionStorage.getItem('Name'),
+              email: sessionStorage.getItem('Email'),
+              editing: false,
+          });
+          window.location.reload();
+      } catch (e) {
+          alert(e.message);
+      }
+
+  }
+
+  validateEmail(email) {
+      if (email === undefined) {
+          return false;
+      }
+      // eslint-disable-next-line
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
   }
 
   addGame() {

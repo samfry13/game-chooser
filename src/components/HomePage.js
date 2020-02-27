@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import Modal from "./Modal";
 
-import {games} from '../data/games';
 import PlayerIcon from '../assets/person-24px.svg';
 import TimerIcon from '../assets/timer-24px.svg';
 import DefaultPage from "./modal_pages/DefaultPage";
@@ -20,7 +19,8 @@ export default class HomePage extends Component {
         length: 0,
       },
       isSearchActive: false,
-    }
+    };
+    this.games = Object.values(JSON.parse(sessionStorage.getItem('Games')));
   }
   // Converts a #ffffff hex string into an [r,g,b] array
   h2r(hex) {
@@ -76,7 +76,7 @@ export default class HomePage extends Component {
 
   filterGames() {
     const {searchQueries: {players, difficulty, length}} = this.state;
-    return games.filter(game => {
+    return this.games.filter(game => {
       return game.minPlayers >= parseInt(players) - 2 && game.maxPlayers <= parseInt(players) + 2;
     }).filter(game => {
       return game.difficulty >= parseFloat(difficulty) - 0.2 && game.difficulty <= parseFloat(difficulty) + 0.2;
@@ -87,7 +87,7 @@ export default class HomePage extends Component {
 
   render() {
     const {openModal, modalPageNum, searchQueries, isSearchActive} = this.state;
-    const filteredGames = isSearchActive ? this.filterGames() : games;
+    const filteredGames = isSearchActive ? this.filterGames() : this.games;
     return (
       <>
         <div id="home">
