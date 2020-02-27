@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PrimaryButton from "./PrimaryButton";
-import HttpConnector from "../HttpConnector";
+import {login, getUserAttributes} from "../HttpConnector";
 import {Redirect} from "react-router";
 import Routes from "../constants/paths";
 
@@ -46,9 +46,9 @@ export default class LoginPage extends Component {
           return;
       }
       try {
-          let id = await HttpConnector.login(email, password);
+          let id = await login(email, password);
           sessionStorage.setItem('UserId', id);
-          let attributes = await HttpConnector.getUserAttributes(id);
+          let attributes = await getUserAttributes(id);
           sessionStorage.setItem('Name', attributes.name);
           sessionStorage.setItem('Email', attributes.email);
           sessionStorage.setItem('Games', JSON.stringify(attributes.games));
