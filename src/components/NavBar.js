@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import logo from "../assets/logo_combined_h-200.png";
+import logo from "../assets/logo_white_combined.png";
 import profile from "../assets/profile_icon.png";
 import {Link} from 'react-router-dom';
 import Routes from '../constants/paths';

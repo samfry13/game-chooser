@@ -67,8 +67,7 @@ body {
 }
 
 #header .logo img {
-    height: 80px;
-    width: auto;
+    width: 275px;
 }
 
 #header .welcome {
