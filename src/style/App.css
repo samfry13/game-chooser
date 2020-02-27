@@ -48,6 +48,7 @@ body {
     grid-column-gap: 8px;
 }
 
+/*--------------NavBar------------------*/
 #header .grid-wrapper {
     grid-template-rows: 75px;
     align-items: center;
@@ -105,6 +106,7 @@ body {
     background: #04383E;
 }
 
+/*-------------Landing Page---------------*/
 #landing {
     display: flex;
     min-height: 90%
@@ -157,6 +159,86 @@ body {
     align-self: start;
 }
 
+/*--------------Login Page--------------*/
+#login {
+    margin: auto;
+    max-width: 300px;
+    display: grid;
+}
+
+#login .title {
+    color: #04383E;
+    font-size: 36px;
+    justify-self: center;
+}
+
+#login .buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+}
+
+/*--------------Custom Input Field--------------*/
+.input {
+    position: relative;
+    margin: 20px 0;
+}
+
+.input input {
+    background: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #04383E;
+}
+
+.input input:focus {
+    outline: none;
+}
+
+.input input:focus ~ label,
+.input input:valid ~ label {
+    top: -14px;
+    font-size: 12px;
+    color: #04383E;
+}
+
+.input input:focus ~ .bar:before {
+    width: 100%;
+}
+
+.input label {
+    color: #04383E;
+    font-size: 16px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+}
+
+.input .bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.input .bar:before {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 0;
+    position: absolute;
+    background: #04383E;
+    transition: 0.2s ease all;
+    left: 0;
+}
+
+/*--------------Home Page---------------*/
 #home .grid-wrapper {
     grid-template-rows: 400px auto;
     grid-template-columns: auto repeat(3, 398px) auto
