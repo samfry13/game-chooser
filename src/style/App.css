@@ -159,19 +159,21 @@ body {
 }
 
 /*--------------Login Page--------------*/
-#login {
+#login, #register {
     margin: auto;
     max-width: 300px;
     display: grid;
 }
 
-#login .title {
+#login .title,
+#register .title {
     color: #04383E;
     font-size: 36px;
     justify-self: center;
 }
 
-#login .buttons {
+#login .buttons,
+#register .buttons {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-between;

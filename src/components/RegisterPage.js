@@ -3,6 +3,7 @@ import PrimaryButton from "./PrimaryButton";
 import HttpConnector from "../HttpConnector";
 import {Redirect} from "react-router";
 import Routes from "../constants/paths";
+import InputField from "./InputField";
 
 
 export default class RegisterPage extends Component {
@@ -15,37 +16,29 @@ export default class RegisterPage extends Component {
   }
 
   render() {
-    if (this.state.redirectHome) {
+    const {redirectHome, redirectLogin, name, email, password} = this.state;
+    if (redirectHome) {
         return <Redirect to={Routes.home} />
     }
-    if (this.state.redirectLogin) {
+    if (redirectLogin) {
         return <Redirect to={Routes.login} />
     }
     return (
         <div id="register">
             <div className="title">Register</div>
-            <div className="name-input">
-                <p>Name</p>
-                <input id="name"/>
+            <InputField label="Name" value={name} onChange={value => this.setState({name: value})}/>
+            <InputField label="Email" value={email} onChange={value => this.setState({email: value})}/>
+            <InputField type="password" label="Password" value={password} onChange={value => this.setState({password: value})}/>
+            <div className="buttons">
+                <PrimaryButton id="register-button" text="Register" onClick={async () => await this.register()}/>
+                <PrimaryButton id="login-redirect-button" text="Go To Login" onClick={() => this.setState({redirectLogin: true})}/>
             </div>
-            <div className="email-input">
-                <p>Email</p>
-                <input id="email"/>
-            </div>
-            <div className="password-input">
-                <p>Password</p>
-                <input id="password"/>
-            </div>
-            <PrimaryButton id="register-button" text="Register" onClick={async () => await this.register()}/>
-            <PrimaryButton id="login-redirect-button" text="Go To Login" onClick={() => this.setState({redirectLogin: true})}/>
         </div>
     );
   }
 
   async register() {
-      let name = document.getElementById('name').value;
-      let email = document.getElementById('email').value;
-      let password = document.getElementById('password').value ?? "";
+      const {name, email, password = ""} = this.state;
       if (!this.validateEmail(email)) {
           alert('Invalid email.');
           return;
