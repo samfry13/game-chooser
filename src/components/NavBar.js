@@ -18,15 +18,11 @@ export default class Navbar extends Component {
             </div>
 
             {!loggedIn ? <div/> : <div className="welcome">
-                  <p>Welcome, Sam</p>
+                  <p>Welcome, {sessionStorage.getItem('Name')}</p>
                   <Link to={Routes.profile}><img src={profile} alt="profile_image"/></Link>
                 </div>}
           </div>
         </div>
     );
-  }
-
-  logIn() {
-      this.props.setCookie('SessionID', 'SomeValidSessionID');
   }
 }
