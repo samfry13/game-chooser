@@ -13,7 +13,7 @@ ServerException.prototype = Object.create(Error.prototype);
 ServerException.prototype.name = "ServerException";
 ServerException.prototype.constructor = ServerException;
 
-const serverUrl = 'http://localhost:3001';
+const serverUrl = 'http://localhost:8081';
 const OK = 200;
 const ERROR = 500;
 
