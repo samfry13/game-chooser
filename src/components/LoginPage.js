@@ -4,6 +4,7 @@ import {login, getUserAttributes} from "../HttpConnector";
 import {Redirect} from "react-router";
 import Routes from "../constants/paths";
 import InputField from "./InputField";
+import {games} from "../data/games";
 
 
 export default class LoginPage extends Component {
@@ -11,7 +12,9 @@ export default class LoginPage extends Component {
       super(props);
       this.state = {
           redirectHome: false,
-          redirectRegister: false
+          redirectRegister: false,
+          email: "",
+          password: ""
       }
   }
 
@@ -45,6 +48,16 @@ export default class LoginPage extends Component {
 
   async logIn() {
       const {email, password = ""} = this.state;
+      if (email === "" && password === "") {
+        // This is a default so that the backend doesn't need to be hit
+        sessionStorage.setItem('UserId', 0);
+        sessionStorage.setItem('Name', "User");
+        sessionStorage.setItem('Email', "user@example.com");
+        sessionStorage.setItem('Games', JSON.stringify(games));
+        this.setState({redirectHome: true});
+        return;
+      }
+
       if (!this.validateEmail(email)) {
           alert('Invalid email.');
           return;

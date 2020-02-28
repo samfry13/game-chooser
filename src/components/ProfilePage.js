@@ -24,7 +24,8 @@ export default class ProfilePage extends Component {
                 {editing ? <input id="edit-name" defaultValue={name}/> : <div className="value">{name}</div>}
                 <div className="key">Email:</div>
                 {editing ? <input id="edit-email" defaultValue={email}/> : <div className="value">{email}</div>}
-                {editing ? <PrimaryButton id={"edit-profile"} onClick={async () => await this.saveChanges()} text="Save Changes"/> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
+                {editing ? <PrimaryButton id={"edit-profile"} onClick={async () => await this.saveChanges()} text="Save Changes"/>
+                        : name === "User" ? <></> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
                 {editing ? <div/> : <PrimaryButton id="add-game" onClick={() => this.addGame()} text="Add Game"/>}
             </div>
             <div id="game-table">
