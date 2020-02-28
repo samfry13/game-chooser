@@ -90,7 +90,7 @@ body {
     grid-column: 1 / span 2;
     position: relative;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     color: #fff;
     font-size: 21px;
     text-decoration: none;
