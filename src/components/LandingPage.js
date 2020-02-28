@@ -4,6 +4,7 @@ import chess from "../assets/chess.png";
 import PrimaryButton from "./PrimaryButton";
 import {Redirect} from "react-router";
 import Routes from "../constants/paths";
+import logo from "../assets/logo_green_combined.png";
 
 export default class LandingPage extends Component {
     constructor(props) {
@@ -20,14 +21,10 @@ export default class LandingPage extends Component {
     return (
         <div id="landing">
           <div className="grid-wrapper">
-            <div className="text">
-              <div className="title">Select a Game</div>
-              <PrimaryButton id="get-started" text="Get Started" onClick={() => this.setState({redirectLogin: true})}/>
-            </div>
-            <div className="images">
               <img className="controller" src={chess} alt="controller" width="100px"/>
+              <img className="logo" src={logo} alt="logo"/>
               <img className="chess" src={controller} alt="chess" width="140px"/>
-            </div>
+              <div id="get-started"><PrimaryButton text="Get Started" onClick={() => this.setState({redirectLogin: true})}/></div>
           </div>
         </div>
     );

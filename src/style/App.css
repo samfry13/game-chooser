@@ -111,22 +111,48 @@ body {
     min-height: 90%
 }
 
-#landing .text {
-    grid-column: 2 / span 5;
+#landing .grid-wrapper {
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 2fr repeat(3, 3fr) 2fr;
+    grid-column-gap: 8px;
+    grid-template-rows: repeat(2, 2fr);
+    grid-row-gap: 8px;
 }
 
-#landing .text .title {
-    color: #04383E;
-    font-size: 80px;
-    align-self: center;
+#landing .grid-wrapper .logo {
+    display: grid;
+    grid-column: 3;
+    grid-row: 1;
+    width: 500px;
     justify-self: center;
+    align-self: center;
+    margin-right: 50px;
+    margin-left: 50px;
 }
 
-#landing #get-started {
+#landing .grid-wrapper .controller {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+}
+
+#landing .grid-wrapper .chess {
+    display: grid;
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+}
+
+#landing .grid-wrapper #get-started {
+    display: grid;
+    grid-column: 3;
+    grid-row: 2;
     justify-self: center;
     margin-top: 50px;
+    align-self: start;
 }
 
 #landing #get-started button {
@@ -136,26 +162,6 @@ body {
     padding: 20px 30px;
     background-color: #04383E;
     color: #FFFFFF;
-}
-
-#landing .images {
-    grid-column: 8 / span 2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 2fr);
-    grid-column-gap: 8px;
-    align-items: center;
-}
-
-#landing .images .controller {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-#landing .images .chess {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: start;
 }
 
 /*--------------Login Page--------------*/
