@@ -403,6 +403,13 @@ body {
     align-self: center;
 }
 
+#profile #save-changes {
+    grid-column: 6 / span 2;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    align-self: center;
+}
+
 #profile #add-game {
     grid-column: 7;
     grid-row: 1 / span 2;
