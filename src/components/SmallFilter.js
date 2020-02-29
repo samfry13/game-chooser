@@ -37,7 +37,7 @@ export default class SmallFilter extends Component {
     return (
         <div className="filter">
           <div className="title">{title}</div>
-          <div className={"input" + (showIntermediateValue ? " display" : "")}>
+          <div className={"input-bar" + (showIntermediateValue ? " display" : "")}>
             <div className="values" style={{
               gridTemplateColumns: "repeat(" + newDisplayValues.length + ", auto)"
             }}>

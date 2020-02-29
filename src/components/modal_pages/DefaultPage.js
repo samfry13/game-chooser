@@ -38,7 +38,7 @@ export default class DefaultPage extends Component {
     return (
         <div className={"body" + (active ? " active" : "")}>
           <div className="title">{title}</div>
-          <div className="input">
+          <div className="input-bar">
             <div className="values" style={{
               gridTemplateColumns: "repeat(" + newDisplayValues.length + ", auto)"
             }}>

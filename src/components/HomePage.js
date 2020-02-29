@@ -95,9 +95,9 @@ export default class HomePage extends Component {
             <div className={"search" + (isSearchActive ? " active" : "")}>
               <div className="header">
                 <div className="title">Search Filters</div>
-                <div className="close">Clear<span className="button"
-                                                  onClick={() => this.setState({isSearchActive: false})}
-                >&times;</span></div>
+                <div className="close"
+                     onClick={() => this.setState({isSearchActive: false})}
+                >Clear</div>
               </div>
               <div className="filters">
                 <SmallFilter title="Players"
