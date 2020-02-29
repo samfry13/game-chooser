@@ -397,14 +397,21 @@ body {
 }
 
 #profile #edit-profile {
-    grid-column: 6 / span 2;
+    grid-column: 6;
     grid-row: 1 / span 2;
     justify-self: center;
     align-self: center;
 }
 
 #profile #add-game {
-    grid-column: 7 / span 2;
+    grid-column: 7;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    align-self: center;
+}
+
+#profile #sign-out {
+    grid-column: 8;
     grid-row: 1 / span 2;
     justify-self: center;
     align-self: center;

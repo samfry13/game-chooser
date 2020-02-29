@@ -54,7 +54,8 @@ export default class LoginPage extends Component {
         sessionStorage.setItem('Name', "User");
         sessionStorage.setItem('Email', "user@example.com");
         sessionStorage.setItem('Games', JSON.stringify(games));
-        this.setState({redirectHome: true});
+        await this.setState({redirectHome: true});
+        window.location.reload();
         return;
       }
 
@@ -69,7 +70,7 @@ export default class LoginPage extends Component {
           sessionStorage.setItem('Name', attributes.name);
           sessionStorage.setItem('Email', attributes.email);
           sessionStorage.setItem('Games', JSON.stringify(attributes.games));
-          this.setState(() => ({
+          await this.setState(() => ({
               redirectHome: true
           }));
           window.location.reload();

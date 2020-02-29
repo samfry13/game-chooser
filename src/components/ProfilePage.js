@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PrimaryButton from "./PrimaryButton";
 import {updateUser, getUserAttributes} from "../HttpConnector";
+import {Redirect} from "react-router";
+import Routes from "../constants/paths";
 
 
 export default class ProfilePage extends Component {
@@ -9,13 +11,20 @@ export default class ProfilePage extends Component {
       this.state = {
           editing: false,
           name: sessionStorage.getItem('Name'),
-          email: sessionStorage.getItem('Email')
+          email: sessionStorage.getItem('Email'),
+          redirectHome: false
       };
-      this.games = Object.values(JSON.parse(sessionStorage.getItem('Games')));
+      if (sessionStorage.getItem('Games')) {
+          this.games = Object.values(JSON.parse(sessionStorage.getItem('Games')));
+      }
   }
 
   render() {
     const {editing, name, email} = this.state;
+
+    if (this.state.redirectHome) {
+        return <Redirect to={Routes.home}/>
+    }
 
     return (
         <div id="profile">
@@ -27,6 +36,7 @@ export default class ProfilePage extends Component {
                 {editing ? <PrimaryButton id={"edit-profile"} onClick={async () => await this.saveChanges()} text="Save Changes"/>
                         : name === "User" ? <></> : <PrimaryButton id="edit-profile" onClick={() => this.editProfile()} text="Edit Profile"/>}
                 {editing ? <div/> : <PrimaryButton id="add-game" onClick={() => this.addGame()} text="Add Game"/>}
+                {editing ? <div/> : <PrimaryButton id="sign-out" onClick={async () => await this.signOut()} text="Sign Out"/>}
             </div>
             <div id="game-table">
                 <div id="table-header" className="row">
@@ -75,7 +85,12 @@ export default class ProfilePage extends Component {
       } catch (e) {
           alert(e.message);
       }
+  }
 
+  async signOut() {
+      sessionStorage.clear();
+      await this.setState({redirectHome: true});
+      window.location.reload();
   }
 
   validateEmail(email) {
